@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "name": "GTJobFinder",
+    "description": "This extension will return open job listings from various websites",
+    "version": "1.0",
+    "homepage_url": "gthomas.me",
+    "background_page": "background.html",
+    "permissions": [
+        "http://insert_base_rss_url_here.com/*",
+        "activeTab"
+    ],
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    }
+}
