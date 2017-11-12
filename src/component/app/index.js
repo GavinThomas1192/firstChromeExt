@@ -1,19 +1,29 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import NoteCreateForm from '../note-list'
 
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.noteCreate = this.noteCreate.bind(this);
+
     }
 
+    noteCreate(note) {
+        note.id = uuid();
+        this.props.app.setState(state => ({
+            notes: [...state.notes, note],
+        }));
+    }
 
     render() {
         return (
             <div>
-                <h1>
-                    Hello world.
-                </h1>
-                <Button bStyle="primary">button</Button>
+                <h1>Create a new note</h1>
+                <NoteCreateForm
+                    handleSubmit={this.noteCreate}
+                    buttonLabel='Submit Note'
+                />
             </div>
         )
     }
