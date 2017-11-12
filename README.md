@@ -1,2 +1,2 @@
 # firstChromeExt
-## This is built using React!
+## This is a simple note chrom extension built using React!
