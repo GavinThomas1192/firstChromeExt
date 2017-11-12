@@ -11,6 +11,7 @@ class NoteList extends React.Component {
     render() {
         return (
             <div>
+                <h1>note list container</h1>
                 <ul className="orderList">
                     {this.props.notes.map((item, i) => {
                         return (

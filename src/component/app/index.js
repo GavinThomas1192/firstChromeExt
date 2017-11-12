@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import NoteCreateForm from '../note-list'
+import NoteCreateForm from '../note-create-form'
 
 class App extends React.Component {
     constructor(props) {
