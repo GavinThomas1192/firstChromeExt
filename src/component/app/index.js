@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import NoteCreateForm from '../note-create-form'
+import uuid from 'uuid/v1';
 
 class App extends React.Component {
     constructor(props) {
