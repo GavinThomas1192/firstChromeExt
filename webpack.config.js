@@ -34,6 +34,10 @@ module.exports = {
                 })
             },
             {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader']),
+            },
+            {
                 test: /\.(ico|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
                 use: 'file-loader?limit=100000'
             },
