@@ -2,6 +2,7 @@
 
 
 import React from 'react';
+import { Button } from 'react-bootstrap'
 
 class NoteCreateForm extends React.Component {
     constructor(props) {
@@ -49,17 +50,17 @@ class NoteCreateForm extends React.Component {
                     <span className="underline"></span>
                 </div>
                 <div className='inputContainer'>
-                    <input
+                    <textarea
                         name='content'
                         type='text'
                         value={this.state.content}
                         placeholder='Enter Note'
                         onChange={this.handleChange}
-                    />
+                    ></textarea>
                     <span className="underline"></span>
                 </div>
                 <div className='buttonContainer'>
-                    <button className='button' type='submit'>{this.props.buttonLabel}</button>
+                    <Button bsStyle='primary' type='submit'>{this.props.buttonLabel}</Button>
                 </div>
             </form>
         );

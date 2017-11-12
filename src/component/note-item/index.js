@@ -2,6 +2,7 @@
 
 import React from 'react';
 import NoteCreateForm from '../note-create-form';
+import { Button } from 'react-bootstrap'
 
 class NoteItem extends React.Component {
     constructor(props) {
@@ -48,7 +49,7 @@ class NoteItem extends React.Component {
                         :
                         <section>
                             <section>
-                                <h2>*{this.props.note.title}*</h2>
+                                <h2>{this.props.note.title}</h2>
                             </section>
                             <span>
                                 <section>
@@ -56,9 +57,10 @@ class NoteItem extends React.Component {
                                 </section>
                             </span>
                             <section>
+                                <Button bsStyle='success' onClick={this.setTrue}>Edit</Button>
                                 <p>Double Click To Edit</p>
                             </section>
-                            <button className='button' onClick={this.handleDelete}>X</button>
+                            <Button bsStyle='danger' className='button' onClick={this.handleDelete}>Delete</Button>
                         </section>
                 }
             </li>

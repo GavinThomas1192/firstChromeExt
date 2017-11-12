@@ -9,7 +9,8 @@ class AppContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            notes: [{ title: 'hi', content: 'content' }],
+            notes: [{ title: 'Hello Title', content: 'This is an example note.' }],
+
         };
         this.getApp = this.getApp.bind(this);
         this.deleteNote = this.deleteNote.bind(this);
@@ -30,8 +31,32 @@ class AppContainer extends React.Component {
     }
 
 
+    componentDidMount() {
+        let settedNotes = [];
+        // chrome.storage.sync.set({ "notes": this.state.notes }, function () {
+        //     console.log('SET THESE NOTES', this.state.notes)
+        // });
+        chrome.storage.sync.get("notes", function (pulledNotes) {
+            console.log('PULLED FROM CHROME STORAGE', pulledNotes.notes);
+            settedNotes = pulledNotes.notes;
 
+            console.log('settedNotes', settedNotes);
+            this.setState({ notes: settedNotes })
+            console.log('stateNotes', this.state.notes);
+        }.bind(this))
+
+    }
     componentDidUpdate() {
+        // let settedNotes;
+        // chrome.storage.sync.set({ "notes": this.state.notes }, function () {
+        //     console.log('SET THESE NOTES', this.state.notes)
+        // });
+        // chrome.storage.sync.get("notes", function (pulledNotes) {
+        //     console.log('PULLED FROM CHROME STORAGE', pulledNotes);
+        //     settedNotes = pulledNotes.notes;
+        // })
+        // this.setState({ notes: settedNotes })
+
         console.log('___STATE___', this.state);
     }
 

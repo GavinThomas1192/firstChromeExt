@@ -9,8 +9,10 @@ class NoteList extends React.Component {
     }
 
     render() {
+
+        console.log('Inside note list NOTES', this.props)
         return (
-            <div>
+            < div >
                 <h1>note list container</h1>
                 <ul className="orderList">
                     {this.props.notes.map((item, i) => {
@@ -24,7 +26,7 @@ class NoteList extends React.Component {
                     }
                     )}
                 </ul>
-            </div>
+            </div >
         );
     }
 }
