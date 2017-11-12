@@ -4,23 +4,23 @@ document.addEventListener('DOMContentLoaded', function () {
     let imageSRC = document.getElementById('img');
     let xhr = new XMLHttpRequest();
     let finalURL = ''
-    let googleBackground = document.getElementById('body#gsr.hp.vasq');
+    let googleBackground = document.getElementById('gsr.hp.vasq');
 
     listJobs.addEventListener('click', function () {
 
 
-        xhr.open("GET", "https://pixabay.com/api/?key=7017392-43a5081998cb4ca1680a3ba8e&q=&image_type=photo&pretty=true&orientation=horizontal&min_width=1440&order=popular&per_page=10", false);
-        xhr.send();
+        // xhr.open("GET", "https://pixabay.com/api/?key=7017392-43a5081998cb4ca1680a3ba8e&q=&image_type=photo&pretty=true&orientation=horizontal&min_width=1440&order=popular&per_page=10", false);
+        // xhr.send();
 
-        let data = xhr.response;
+        // let data = xhr.response;
 
-        parsedData = JSON.parse(data);
-        div.innerHTML = JSON.stringify(parsedData.hits[0].webformatURL)
+        // parsedData = JSON.parse(data);
+        // div.innerHTML = JSON.stringify(parsedData.hits[0].webformatURL)
 
         // googleBackground.style.backgroundImage = "url(finalURL)"
         googleBackground.style.backgroundColor = "red";
 
-        finalURL = JSON.stringify(parsedData.hits[0].webformatURL)
+        // finalURL = JSON.stringify(parsedData.hits[0].webformatURL)
 
 
 
