@@ -18,9 +18,23 @@ class AppContainer extends React.Component {
 
 
     deleteNote(id) {
+        chrome.storage.sync.clear(function () {
+            console.log('CLEARING CHROME SYNC STORAGE')
+        });
         let notes = this.state.notes;
         notes = notes.filter(note => note.id !== id);
         this.setState({ notes: notes });
+        chrome.storage.sync.set({ "notes": this.state.notes }, function () {
+            console.log('NOTE SET AFTER DELETE', this.state.notes)
+        }.bind(this));
+
+
+        chrome.storage.sync.get("notes", function (pulledNotes) {
+            console.log('NOTE GET AFTER DELETE', pulledNotes.notes);
+
+            this.setState({ notes: pulledNotes.notes })
+            console.log('UPDATED STATE WITH NOTE GETS FROM DID MOUNT', this.state.notes);
+        }.bind(this))
     }
 
     getApp() {
@@ -37,25 +51,29 @@ class AppContainer extends React.Component {
         //     console.log('SET THESE NOTES', this.state.notes)
         // });
         chrome.storage.sync.get("notes", function (pulledNotes) {
-            console.log('PULLED FROM CHROME STORAGE', pulledNotes.notes);
+            console.log('NOTE GET DID MOUNT', pulledNotes.notes);
             settedNotes = pulledNotes.notes;
 
             console.log('settedNotes', settedNotes);
             this.setState({ notes: settedNotes })
-            console.log('stateNotes', this.state.notes);
+            console.log('UPDATED STATE WITH NOTE GETS FROM DID MOUNT', this.state.notes);
         }.bind(this))
 
     }
     componentDidUpdate() {
-        // let settedNotes;
+        let settedNotes;
         // chrome.storage.sync.set({ "notes": this.state.notes }, function () {
-        //     console.log('SET THESE NOTES', this.state.notes)
-        // });
+        //     console.log('NOTE SET DID UPDATE', this.state.notes)
+        // }.bind(this));
+
         // chrome.storage.sync.get("notes", function (pulledNotes) {
-        //     console.log('PULLED FROM CHROME STORAGE', pulledNotes);
+        //     console.log('NOTE GET DID UPDATE', pulledNotes.notes);
         //     settedNotes = pulledNotes.notes;
-        // })
-        // this.setState({ notes: settedNotes })
+
+        //     this.setState({ notes: settedNotes })
+        //     console.log('UPDATED STATE WITH NOTE GETS FROM DID UPDATE', this.state.notes);
+        // }.bind(this))
+
 
         console.log('___STATE___', this.state);
     }
