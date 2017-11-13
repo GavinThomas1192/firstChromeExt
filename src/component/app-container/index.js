@@ -82,9 +82,7 @@ class AppContainer extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>hello from the app container in src</h1>
-
+            <div className='divContainer'>
 
                 <App
                     app={this.getApp()} />

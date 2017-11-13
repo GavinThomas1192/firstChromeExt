@@ -36,7 +36,7 @@ class NoteItem extends React.Component {
 
     render() {
         return (
-            <li onDoubleClick={this.setTrue}>
+            <p>
                 {
                     this.state.editing == true ?
                         <section className="update">
@@ -63,7 +63,7 @@ class NoteItem extends React.Component {
                             <Button bsStyle='danger' className='button' onClick={this.handleDelete}>Delete</Button>
                         </section>
                 }
-            </li>
+            </p>
         );
     }
 }
