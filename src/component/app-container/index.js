@@ -18,6 +18,16 @@ class AppContainer extends React.Component {
 
 
     deleteNote(id) {
+        //need to pull storage
+        //filter out by id
+        //set storage
+        chrome.storage.sync.get("notes", function (pulledNotes) {
+            console.log('NOTE GET AFTER DELETE', pulledNotes.notes);
+
+            this.setState({ notes: pulledNotes.notes })
+            console.log('UPDATED STATE WITH NOTE GETS FROM DID MOUNT', this.state.notes);
+        }.bind(this))
+
         chrome.storage.sync.clear(function () {
             console.log('CLEARING CHROME SYNC STORAGE')
         });
@@ -27,14 +37,6 @@ class AppContainer extends React.Component {
         chrome.storage.sync.set({ "notes": this.state.notes }, function () {
             console.log('NOTE SET AFTER DELETE', this.state.notes)
         }.bind(this));
-
-
-        chrome.storage.sync.get("notes", function (pulledNotes) {
-            console.log('NOTE GET AFTER DELETE', pulledNotes.notes);
-
-            this.setState({ notes: pulledNotes.notes })
-            console.log('UPDATED STATE WITH NOTE GETS FROM DID MOUNT', this.state.notes);
-        }.bind(this))
     }
 
     getApp() {
