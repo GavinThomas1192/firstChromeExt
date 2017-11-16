@@ -1,6 +1,6 @@
 // import './_note-form-container.scss';
 
-
+import { connect } from 'react-redux'
 import React from 'react';
 import { Button } from 'react-bootstrap'
 
@@ -29,10 +29,12 @@ class NoteCreateForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        if (this.props.buttonLabel == 'Update Note') {
-            this.props.handleSubmit(this.state, this.props.noteUpdate.id);
-        } else {
-            this.props.handleSubmit(this.state);
+        {
+            this.props.buttonText == 'Update Note' ?
+                this.props.onComplete(this.state, this.props.noteUpdate.id)
+                :
+
+                this.props.onComplete(this.state);
         }
     }
 
@@ -67,4 +69,18 @@ class NoteCreateForm extends React.Component {
     }
 }
 
-export default NoteCreateForm;
+
+let mapStateToProps = state => {
+
+    //   return {
+    //     account: {...state.user},
+
+    //   };
+};
+let mapDispatchToProps = dispatch => ({
+    userFetch: () => dispatch(userFetchRequest()),
+
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteCreateForm);

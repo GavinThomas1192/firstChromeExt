@@ -2,6 +2,7 @@
 
 import React from 'react';
 import NoteItem from '../note-item';
+import { connect } from 'react-redux'
 
 class NoteList extends React.Component {
     constructor(props) {
@@ -10,24 +11,39 @@ class NoteList extends React.Component {
 
     render() {
 
-        console.log('Inside note list NOTES', this.props)
+        console.log('Inside note-list component', this.props)
         return (
             < div >
-                <ul className="orderList">
-                    {this.props.notes.map((item, i) => {
-                        return (
-                            <NoteItem key={i} note={item}
-                                deleteNote={this.props.deleteNote}
-                                app={this.props.app}
-                                notes={this.props.app.state.notes}
-                            />
-                        );
-                    }
-                    )}
-                </ul>
+                <h1>Hello from the note-list component</h1>
+                {this.props.notes.length !== 0 ?
+                    <ul className="orderList">
+                        {this.props.notes.map((item, i) => {
+                            return (
+                                <NoteItem key={i} note={item}
+
+                                />
+                            );
+                        }
+                        )}
+                    </ul>
+                    :
+                    <h3>You have no notes!</h3>
+                }
             </div >
         );
     }
 }
 
-export default NoteList;
+
+
+let mapStateToProps = state => ({
+    notes: state.notes,
+});
+
+let mapDispatchToProps = dispatch => ({
+    chromeGet: (key) => dispatch(chromeGetRequest(key)),
+    noteCreate: (note) => dispatch(noteCreateRequest(note)),
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteList);
