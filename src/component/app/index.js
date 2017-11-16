@@ -15,6 +15,9 @@ class App extends React.Component {
         this.props.app.setState(state => ({
             notes: [...state.notes, note],
         }));
+        chrome.storage.sync.set({ "notes": this.state.notes }, function () {
+            console.log('__SETTING_NOTES_INTO_STORAGE__', this.state.notes)
+        }.bind(this));
     }
 
     render() {

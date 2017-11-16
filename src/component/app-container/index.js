@@ -64,22 +64,19 @@ class AppContainer extends React.Component {
 
     }
     componentDidUpdate() {
-        let settedNotes;
-        console.log('COMPONENTDIDUPDATE', this.state)
+        console.log('__COMPONENT__DID__UPDATE__')
+        // chrome.storage.sync.clear();
+        chrome.storage.sync.get("notes", function (pulledNotes) {
+            console.log('__GETTING_NOTES_FROM_STORAGE__', pulledNotes.notes);
+
+            this.setState({ notes: pulledNotes.notes })
+            console.log('__SETTING_STATE_FROM_GET__', this.state.notes);
+        }.bind(this))
         // chrome.storage.sync.set({ "notes": this.state.notes }, function () {
-        //     console.log('NOTE SET DID UPDATE', this.state.notes)
+        //     console.log('__SETTING_NOTES_INTO_STORAGE__', this.state.notes)
         // }.bind(this));
 
-        // chrome.storage.sync.get("notes", function (pulledNotes) {
-        //     console.log('NOTE GET DID UPDATE', pulledNotes.notes);
-        //     settedNotes = pulledNotes.notes;
-
-        //     this.setState({ notes: settedNotes })
-        //     console.log('UPDATED STATE WITH NOTE GETS FROM DID UPDATE', this.state.notes);
-        // }.bind(this))
-
-
-        console.log('___STATE___', this.state);
+        console.log('__END_OF_UPDATE');
     }
 
     render() {
