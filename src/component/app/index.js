@@ -24,7 +24,11 @@ class App extends React.Component {
     }
 
     componentDidUpdate() {
-        this.props.chromeSet('notes', this.props.notes);
+        {
+            this.props.notes.length !== 0 ?
+                this.props.chromeSet('notes', this.props.notes)
+                : console.log('This.props.notes looks empty')
+        }
     }
 
     // componentWillReceiveProps(nextProps) {

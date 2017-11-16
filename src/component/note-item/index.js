@@ -1,8 +1,9 @@
 // import './_note-item-container.scss';
-
+import { connect } from 'react-redux';
 import React from 'react';
 import NoteCreateForm from '../note-create-form';
 import { Button } from 'react-bootstrap'
+import { noteUpdateRequest, noteDeleteRequest } from '../../action/note-actions'
 
 class NoteItem extends React.Component {
     constructor(props) {
@@ -11,28 +12,17 @@ class NoteItem extends React.Component {
             editing: null,
         };
 
-        this.updateNote = this.updateNote.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+
         this.setTrue = this.setTrue.bind(this);
     }
 
-    handleDelete() {
-        this.props.deleteNote(this.props.note.id);
-    }
+
 
     setTrue() {
         this.setState({ editing: true });
     }
 
-    updateNote(note, id) {
-        note.id = id;
-        let notes = this.props.notes;
-        notes = notes.map(prevNote => {
-            return id === prevNote.id ? note : prevNote;
-        });
-        this.props.app.setState({ notes: notes });
-        this.setState({ editing: false });
-    }
+
 
     render() {
         return (
@@ -41,9 +31,8 @@ class NoteItem extends React.Component {
                     this.state.editing == true ?
                         <section className="update">
                             <NoteCreateForm
-                                noteUpdate={this.props.note}
-                                buttonLabel='Update Note'
-                                handleSubmit={this.updateNote}
+                                buttonText='Update Note'
+                                onComplete={this.props.noteUpdate}
                             />
                         </section>
                         :
@@ -60,7 +49,7 @@ class NoteItem extends React.Component {
                                 <Button bsStyle='success' onClick={this.setTrue}>Edit</Button>
                                 <p>Double Click To Edit</p>
                             </section>
-                            <Button bsStyle='danger' className='button' onClick={this.handleDelete}>Delete</Button>
+                            <Button bsStyle='danger' className='button' onClick={() => this.props.noteDelete(note)}>Delete</Button>
                         </section>
                 }
             </p>
@@ -68,4 +57,14 @@ class NoteItem extends React.Component {
     }
 }
 
-export default NoteItem;
+let mapStateToProps = state => ({
+    notes: state.notes,
+});
+
+let mapDispatchToProps = dispatch => ({
+    noteDelete: (note) => dispatch(noteDeleteRequest(note)),
+    noteUpdate: (note) => dispatch(noteUpdateRequest(note)),
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteItem);

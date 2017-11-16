@@ -27,10 +27,14 @@ export const noteSet = note => ({
 export const chromeGetRequest = key => dispatch => {
 
   chrome.storage.sync.get(key, function (pulledData) {
-    console.log('_CHROME_STORAGE_GET_', pulledData);
-    dispatch(noteSet(pulledData))
-    return pulledData;
+    console.log('_CHROME_STORAGE_GET_', pulledData.notes[0]);
+    {
+      pulledData.notes !== 0 ?
+        dispatch(noteSet(pulledData))
+        :
+        console.log('NOTHING MATCHING KEY');
 
+    }
   })
 }
 
@@ -41,14 +45,20 @@ export const chromeSetRequest = (key, data) => dispatch => {
   });
 }
 
-// chrome.storage.sync.set({ "notes": this.state.notes }, function () {
-//   console.log('SET THESE NOTES', this.state.notes)
-// })
-
-
 
 export const noteCreateRequest = note => dispatch => {
   console.log('_ROUTING_NEWNOTE_TO_STORE_', note)
   dispatch(noteCreate(note));
+}
+
+export const noteUpdateRequest = note => dispatch => {
+  console.log('_NOTE_UPDATE_INCOMING_NOTE', note)
+  dispatch(noteUpdate(note));
+}
+
+export const noteDeleteRequest = note => dispatch => {
+  console.log('_NOTE_DELETE_INCOMING_NOTE', note)
+
+  dispatch(noteDelete(note));
 }
 

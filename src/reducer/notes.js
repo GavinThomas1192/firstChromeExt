@@ -2,8 +2,12 @@ export default (state = [], action) => {
   let { type, payload } = action;
   switch (type) {
     case 'NOTE_SET':
-      console.log('PAYLOAD', payload.notes[0][0])
-      return [payload.notes[0][0], ...state];
+      console.log('PAYLOAD', payload.notes)
+      {
+        payload.notes.length !== 0 ?
+          [payload.notes, ...state]
+          : console.log('WHOOPSHEDIDITAGAIN')
+      }
 
     case 'NOTE_CREATE':
       return [payload, ...state];
