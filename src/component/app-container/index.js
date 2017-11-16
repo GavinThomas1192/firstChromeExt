@@ -49,9 +49,9 @@ class AppContainer extends React.Component {
 
     componentDidMount() {
         let settedNotes = [];
-        // chrome.storage.sync.set({ "notes": this.state.notes }, function () {
-        //     console.log('SET THESE NOTES', this.state.notes)
-        // });
+        chrome.storage.sync.set({ "notes": this.state.notes }, function () {
+            console.log('SET THESE NOTES', this.state.notes)
+        })
         chrome.storage.sync.get("notes", function (pulledNotes) {
             console.log('NOTE GET DID MOUNT', pulledNotes.notes);
             settedNotes = pulledNotes.notes;
@@ -60,10 +60,12 @@ class AppContainer extends React.Component {
             this.setState({ notes: settedNotes })
             console.log('UPDATED STATE WITH NOTE GETS FROM DID MOUNT', this.state.notes);
         }.bind(this))
+    
 
     }
     componentDidUpdate() {
         let settedNotes;
+        console.log('COMPONENTDIDUPDATE', this.state)
         // chrome.storage.sync.set({ "notes": this.state.notes }, function () {
         //     console.log('NOTE SET DID UPDATE', this.state.notes)
         // }.bind(this));
