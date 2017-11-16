@@ -1,36 +1,42 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import { Button } from 'react-bootstrap';
 import NoteCreateForm from '../note-create-form'
 import uuid from 'uuid/v1';
+import * as utils from '../../lib/storage';
+import {notesFetchRequest} from '../../action/note-actions';
+
+
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.noteCreate = this.noteCreate.bind(this);
+        // this.noteCreate = this.noteCreate.bind(this);
 
     }
 
-    noteCreate(note) {
-        note.id = uuid();
-        this.props.app.setState(state => ({
-            notes: [...state.notes, note],
-        }));
-        chrome.storage.sync.set({ "notes": this.state.notes }, function () {
-            console.log('__SETTING_NOTES_INTO_STORAGE__', this.state.notes)
-        }.bind(this));
+    componentDidMount() {
+        this.props.notesFetch("notes");
     }
 
     render() {
         return (
             <div>
-                <h1>Create a new note</h1>
-                <NoteCreateForm
-                    handleSubmit={this.noteCreate}
-                    buttonLabel='Submit Note'
-                />
+                <h1>Hello from App component</h1>
+            
             </div>
         )
     }
 }
 
-export default App;
+
+let mapStateToProps = state => ({
+    notes: state.notes,
+  });
+  
+  let mapDispatchToProps = dispatch => ({
+    notesFetch: (key) => dispatch(notesFetchRequest(key)),
+  
+  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
