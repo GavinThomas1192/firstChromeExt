@@ -38,6 +38,9 @@ class NoteCreateForm extends React.Component {
 
                 this.props.onComplete(this.state);
         }
+        this.setState = ({
+
+        })
     }
 
     render() {
