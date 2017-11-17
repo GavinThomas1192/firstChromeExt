@@ -41,6 +41,7 @@ class NoteCreateForm extends React.Component {
         this.setState = ({
 
         })
+        this.props.toggle();
     }
 
     render() {
@@ -77,10 +78,7 @@ class NoteCreateForm extends React.Component {
 
 let mapStateToProps = state => {
 
-    //   return {
-    //     account: {...state.user},
 
-    //   };
 };
 let mapDispatchToProps = dispatch => ({
     userFetch: () => dispatch(userFetchRequest()),

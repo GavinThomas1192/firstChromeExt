@@ -4,10 +4,14 @@ import { Button } from 'react-bootstrap';
 import NoteCreateForm from '../note-create-form'
 import uuid from 'uuid/v1';
 import NoteList from '../note-list'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
 import * as utils from '../../lib/storage';
 import { chromeGetRequest, chromeSetRequest, noteCreateRequest } from '../../action/note-actions';
 
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class App extends React.Component {
@@ -16,6 +20,7 @@ class App extends React.Component {
         this.state = {
             toggleNoteCreate: false,
         }
+        this.toggleCreateForm = this.toggleCreateForm.bind(this);
 
     }
 
@@ -25,38 +30,41 @@ class App extends React.Component {
 
     componentDidUpdate() {
         this.props.chromeSet('notes', this.props.notes);
-        console.log('LOOKHERE', this.props.notes)
-        // {
-        //     this.props.notes.length !== 0 ?
-        //         this.props.chromeSet('notes', this.props.notes)
-        //         : console.log('This.props.notes looks empty')
-        // }
+        console.log('LOOKHERE', this.props)
+
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     console.log('_APP_COMP_RECEIVED_PROPS', nextProps)
-    //     console.log('THISPROPS', this.props)
-    // }
+    toggleCreateForm() {
+        this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })
+    }
+
+
 
     render() {
         return (
-            <div>
-                <h1>Hello from App component</h1>
+            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+
+                <div>
+                    <h1>Hello from App component</h1>
 
 
-                {this.state.toggleNoteCreate ?
-                    <NoteCreateForm
-                        buttonText={'Submit'}
-                        onComplete={this.props.noteCreate} /> : undefined
-                }
+                    {this.state.toggleNoteCreate ?
+                        <NoteCreateForm
+                            buttonText={'Submit'}
+                            onComplete={this.props.noteCreate}
+                            toggle={this.toggleCreateForm} /> : undefined
+                    }
 
+                    <RaisedButton label="Create Note" primary={true} onClick={() => this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })} />
 
-                <Button bsStyle='primary' onClick={() => this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })}>Toggle Create</Button>
+                    {<Button bsStyle='primary' onClick={() => this.props.toggleNoteCreateForm()}>Toggle TEST</Button>}
 
-                <NoteList
-                />
+                    <NoteList
+                    />
 
-            </div >
+                </div >
+            </MuiThemeProvider>
+
         )
     }
 }

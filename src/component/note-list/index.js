@@ -3,6 +3,23 @@
 import React from 'react';
 import NoteItem from '../note-item';
 import { connect } from 'react-redux'
+import { Row, Col } from 'react-bootstrap'
+import { GridList, GridTile } from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+
+const styles = {
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+    },
+    gridList: {
+        width: 500,
+        height: 450,
+        overflowY: 'auto',
+    },
+};
 
 class NoteList extends React.Component {
     constructor(props) {
@@ -15,17 +32,27 @@ class NoteList extends React.Component {
         return (
             < div >
                 <h1>Hello from the note-list component</h1>
-                {this.props.notes.length !== 0 ?
-                    <ul className="orderList">
-                        {this.props.notes.map((item, i) => {
-                            return (
-                                <NoteItem key={i} note={item}
 
-                                />
-                            );
-                        }
-                        )}
-                    </ul>
+                {this.props.notes.length !== 0 ?
+                    <div style={styles.root}>
+                        <GridList
+                            cellHeight={180}
+                            style={styles.gridList}
+                        >
+
+                            {this.props.notes.map((item, i) => (
+
+                                <GridTile
+                                    key={i}
+                                >
+                                    <NoteItem key={i} note={item}
+
+                                    />
+                                </GridTile>
+                            ))}
+
+                        </GridList>
+                    </div>
                     :
                     <h3>You have no notes!</h3>
                 }
