@@ -1,12 +1,11 @@
 import React from 'react';
 import uuid from 'uuid/v1';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import appCreateStore from '../../lib/app-create-store';
 import ReactDom from 'react-dom';
 import App from '../app';
-import NoteList from '../note-list'
 import NoteCreateForm from '../note-create-form';
-import * as utils from '../../lib/storage';
+// import * as utils from '../../lib/storage';
 
 
 let store = appCreateStore()
@@ -19,7 +18,7 @@ class AppContainer extends React.Component {
             notes: [{ title: 'Hello Title', content: 'This is an example note.' }],
 
         };
-       
+
     }
 
     // noteCreate(note) {
@@ -29,7 +28,7 @@ class AppContainer extends React.Component {
     //     }));
     //     utils.storageSet('notes', this.state.notes);
     //     console.log('__END_OF_NOTE_CREATE__')
-        
+
     // }
 
 
@@ -60,7 +59,7 @@ class AppContainer extends React.Component {
         //     this.setState({ notes: pulledNotes.notes })
         //     console.log('UPDATED STATE WITH NOTE GETS FROM DID MOUNT', this.state.notes);
         // }.bind(this))
-    
+
 
     }
 

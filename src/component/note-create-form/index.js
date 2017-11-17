@@ -1,6 +1,6 @@
 // import './_note-form-container.scss';
 
-
+import { connect } from 'react-redux'
 import React from 'react';
 import { Button } from 'react-bootstrap'
 
@@ -10,9 +10,11 @@ class NoteCreateForm extends React.Component {
 
         let title = props.noteUpdate ? props.noteUpdate.title : '';
         let content = props.noteUpdate ? props.noteUpdate.content : '';
+        let id = props.noteUpdate ? props.noteUpdate.id : 1;
 
         this.state = {
             title,
+            id,
             editing: false,
             completed: false,
             content,
@@ -29,11 +31,16 @@ class NoteCreateForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        if (this.props.buttonLabel == 'Update Note') {
-            this.props.handleSubmit(this.state, this.props.noteUpdate.id);
-        } else {
-            this.props.handleSubmit(this.state);
+        {
+            this.props.buttonText == 'Update Note' ?
+                this.props.onComplete(this.state, this.props.noteUpdate.id)
+                :
+
+                this.props.onComplete(this.state);
         }
+        this.setState = ({
+
+        })
     }
 
     render() {
@@ -60,11 +67,25 @@ class NoteCreateForm extends React.Component {
                     <span className="underline"></span>
                 </div>
                 <div className='buttonContainer'>
-                    <Button bsStyle='primary' type='submit'>{this.props.buttonLabel}</Button>
+                    <Button bsStyle='primary' type='submit'>{this.props.buttonText}</Button>
                 </div>
             </form>
         );
     }
 }
 
-export default NoteCreateForm;
+
+let mapStateToProps = state => {
+
+    //   return {
+    //     account: {...state.user},
+
+    //   };
+};
+let mapDispatchToProps = dispatch => ({
+    userFetch: () => dispatch(userFetchRequest()),
+
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteCreateForm);
