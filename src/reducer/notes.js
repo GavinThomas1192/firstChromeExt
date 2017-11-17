@@ -3,12 +3,12 @@ export default (state = [], action) => {
   switch (type) {
     case 'NOTE_SET':
       console.log('PAYLOAD', payload.notes)
-      {
-        payload.notes.length !== 0 ?
-          [payload.notes, ...state]
-          : console.log('WHOOPSHEDIDITAGAIN')
-      }
-
+      // {
+      //   payload.notes.length !== 0 ?
+      //     [payload.notes, ...state]
+      //     : console.log('WHOOPSHEDIDITAGAIN')
+      // }
+      return payload.notes
     case 'NOTE_CREATE':
       return [payload, ...state];
     case 'NOTE_UPDATE':

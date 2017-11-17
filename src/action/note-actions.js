@@ -29,7 +29,7 @@ export const chromeGetRequest = key => dispatch => {
   chrome.storage.sync.get(key, function (pulledData) {
     console.log('_CHROME_STORAGE_GET_', pulledData.notes[0]);
     {
-      pulledData.notes !== 0 ?
+      pulledData.notes[0] !== 0 ?
         dispatch(noteSet(pulledData))
         :
         console.log('NOTHING MATCHING KEY');
@@ -40,9 +40,12 @@ export const chromeGetRequest = key => dispatch => {
 
 export const chromeSetRequest = (key, data) => dispatch => {
   let stringKey = key.toString();
-  chrome.storage.sync.set({ "notes": data }, function () {
-    console.log('_CHROME_STORAGE_SET_key/data', key, data);
-  });
+  chrome.storage.sync.clear(function () {
+    console.log('_CLEARING_STORAGE_');
+    chrome.storage.sync.set({ "notes": data }, function () {
+      console.log('_CHROME_STORAGE_SET_key/data', key, data);
+    });
+  })
 }
 
 

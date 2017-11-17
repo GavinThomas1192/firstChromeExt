@@ -24,6 +24,10 @@ class App extends React.Component {
     }
 
     componentDidUpdate() {
+        // chrome.storage.sync.clear(function () {
+        //     console.log('_CHROME_STORAGE_CLEARED_')
+        // })
+        console.log('LOOKHERE', this.props.notes)
         {
             this.props.notes.length !== 0 ?
                 this.props.chromeSet('notes', this.props.notes)
@@ -37,7 +41,6 @@ class App extends React.Component {
     // }
 
     render() {
-        console.log('LOOKHERE', this.props)
         return (
             <div>
                 <h1>Hello from App component</h1>

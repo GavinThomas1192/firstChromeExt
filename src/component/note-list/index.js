@@ -11,7 +11,7 @@ class NoteList extends React.Component {
 
     render() {
 
-        console.log('Inside note-list component', this.props)
+        console.log('Inside note-list component', this.props.notes)
         return (
             < div >
                 <h1>Hello from the note-list component</h1>
