@@ -1,9 +1,15 @@
 // import './_note-item-container.scss';
 import { connect } from 'react-redux';
 import React from 'react';
+// import './_noteItem';
 import NoteCreateForm from '../note-create-form';
 import { Button } from 'react-bootstrap'
 import { noteUpdateRequest, noteDeleteRequest } from '../../action/note-actions'
+import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+// import Colors from 'material-ui/styles/colors';
+
 
 class NoteItem extends React.Component {
     constructor(props) {
@@ -26,7 +32,7 @@ class NoteItem extends React.Component {
 
     render() {
         return (
-            <p>
+            <div>
                 {
                     this.state.editing == true ?
                         <section className="update">
@@ -34,26 +40,30 @@ class NoteItem extends React.Component {
                                 noteUpdate={this.props.note}
                                 buttonText='Update Note'
                                 onComplete={this.props.noteUpdate}
+                                toggle={this.setTrue}
                             />
                             <Button bsStyle='success' onClick={this.setTrue}>Edit</Button>
                         </section>
                         :
-                        <section>
-                            <section>
-                                <h2>{this.props.note.title}</h2>
-                            </section>
-                            <span>
-                                <section>
-                                    <p>{this.props.note.content}</p>
-                                </section>
-                            </span>
-                            <section>
-                                <Button bsStyle='success' onClick={this.setTrue}>Edit</Button>
-                            </section>
-                            <Button bsStyle='danger' className='button' onClick={() => this.props.noteDelete(this.props.note)}>Delete</Button>
-                        </section>
+
+                        <Card>
+                            <CardHeader
+                                title={this.props.note.title}
+                                subtitle="Subtitle"
+                                actAsExpander={true}
+                                showExpandableButton={true}
+                            />
+                            <CardActions>
+                                <RaisedButton primary={true} label="Edit" onClick={this.setTrue} />
+                                <FlatButton label="Delete" onClick={() => this.props.noteDelete(this.props.note)} />
+                            </CardActions>
+                            <CardText expandable={true}>
+                                {this.props.note.content}
+                            </CardText>
+                        </Card>
+
                 }
-            </p>
+            </div>
         );
     }
 }
