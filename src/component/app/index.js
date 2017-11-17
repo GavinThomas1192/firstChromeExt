@@ -24,15 +24,13 @@ class App extends React.Component {
     }
 
     componentDidUpdate() {
-        // chrome.storage.sync.clear(function () {
-        //     console.log('_CHROME_STORAGE_CLEARED_')
-        // })
+        this.props.chromeSet('notes', this.props.notes);
         console.log('LOOKHERE', this.props.notes)
-        {
-            this.props.notes.length !== 0 ?
-                this.props.chromeSet('notes', this.props.notes)
-                : console.log('This.props.notes looks empty')
-        }
+        // {
+        //     this.props.notes.length !== 0 ?
+        //         this.props.chromeSet('notes', this.props.notes)
+        //         : console.log('This.props.notes looks empty')
+        // }
     }
 
     // componentWillReceiveProps(nextProps) {

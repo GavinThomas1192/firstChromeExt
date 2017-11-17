@@ -10,9 +10,11 @@ class NoteCreateForm extends React.Component {
 
         let title = props.noteUpdate ? props.noteUpdate.title : '';
         let content = props.noteUpdate ? props.noteUpdate.content : '';
+        let id = props.noteUpdate ? props.noteUpdate.id : 1;
 
         this.state = {
             title,
+            id,
             editing: false,
             completed: false,
             content,
@@ -62,7 +64,7 @@ class NoteCreateForm extends React.Component {
                     <span className="underline"></span>
                 </div>
                 <div className='buttonContainer'>
-                    <Button bsStyle='primary' type='submit'>{this.props.buttonLabel}</Button>
+                    <Button bsStyle='primary' type='submit'>{this.props.buttonText}</Button>
                 </div>
             </form>
         );

@@ -9,7 +9,7 @@ class NoteItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            editing: null,
+            editing: false,
         };
 
 
@@ -19,7 +19,7 @@ class NoteItem extends React.Component {
 
 
     setTrue() {
-        this.setState({ editing: true });
+        this.setState({ editing: !this.state.editing });
     }
 
 
@@ -31,9 +31,11 @@ class NoteItem extends React.Component {
                     this.state.editing == true ?
                         <section className="update">
                             <NoteCreateForm
+                                noteUpdate={this.props.note}
                                 buttonText='Update Note'
                                 onComplete={this.props.noteUpdate}
                             />
+                            <Button bsStyle='success' onClick={this.setTrue}>Edit</Button>
                         </section>
                         :
                         <section>
@@ -47,9 +49,8 @@ class NoteItem extends React.Component {
                             </span>
                             <section>
                                 <Button bsStyle='success' onClick={this.setTrue}>Edit</Button>
-                                <p>Double Click To Edit</p>
                             </section>
-                            <Button bsStyle='danger' className='button' onClick={() => this.props.noteDelete(note)}>Delete</Button>
+                            <Button bsStyle='danger' className='button' onClick={() => this.props.noteDelete(this.props.note)}>Delete</Button>
                         </section>
                 }
             </p>
