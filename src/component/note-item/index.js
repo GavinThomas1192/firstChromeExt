@@ -7,8 +7,11 @@ import { Button } from 'react-bootstrap'
 import { noteUpdateRequest, noteDeleteRequest } from '../../action/note-actions'
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import DatePicker from 'material-ui/DatePicker';
 // import Colors from 'material-ui/styles/colors';
+
 
 
 class NoteItem extends React.Component {
@@ -31,27 +34,43 @@ class NoteItem extends React.Component {
 
 
     render() {
+        const actions = [
+            <FlatButton
+                label="Ok"
+                primary={true}
+                keyboardFocused={true}
+                onClick={this.setTrue}
+            />,
+        ];
         return (
             <div>
                 {
                     this.state.editing == true ?
                         <section className="update">
-                            <NoteCreateForm
-                                noteUpdate={this.props.note}
-                                buttonText='Update Note'
-                                onComplete={this.props.noteUpdate}
-                                toggle={this.setTrue}
-                                toggleText="Nevermind"
-                            />
-                            {/* THIS BUTTON NEEDS TO CHANGE TO NEVERMIND! */}
-                            <Button bsStyle='success' onClick={this.setTrue}>Edit</Button>
+                            <Dialog
+                                title="Dialog With Date Picker"
+                                actions={actions}
+                                modal={false}
+                                open={this.state.editing}
+                                onRequestClose={this.handleClose}
+                            >
+                                <NoteCreateForm
+                                    noteUpdate={this.props.note}
+                                    buttonText='Update Note'
+                                    onComplete={this.props.noteUpdate}
+                                    toggle={this.setTrue}
+                                    toggleText="Nevermind"
+                                />
+                                <Button bsStyle='success' onClick={this.setTrue}>Cancel</Button>
+                                Open a Date Picker dialog from within a dialog.
+            <DatePicker hintText="Date Picker" />
+                            </Dialog>
                         </section>
                         :
 
                         <Card>
                             <CardHeader
                                 title={this.props.note.title}
-                                subtitle="Subtitle"
                                 actAsExpander={true}
                                 showExpandableButton={true}
                             />

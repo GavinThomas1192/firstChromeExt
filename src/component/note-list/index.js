@@ -31,10 +31,10 @@ class NoteList extends React.Component {
         console.log('Inside note-list component', this.props.notes)
         return (
             < div >
-                <h1>Hello from the note-list component</h1>
 
                 {this.props.notes.length !== 0 ?
                     <div style={styles.root}>
+                    <h1>Here are your notes</h1>
                         <GridList
                             cellHeight={180}
                             style={styles.gridList}

@@ -1,8 +1,12 @@
-// import './_note-form-container.scss';
+import './_noteCreateForm.scss';
 
 import { connect } from 'react-redux'
 import React from 'react';
 import { Button } from 'react-bootstrap'
+import TextField from 'material-ui/TextField';
+
+
+
 
 class NoteCreateForm extends React.Component {
     constructor(props) {
@@ -19,6 +23,7 @@ class NoteCreateForm extends React.Component {
             completed: false,
             content,
         };
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -46,26 +51,45 @@ class NoteCreateForm extends React.Component {
 
     render() {
         return (
+
             <form onSubmit={this.handleSubmit}>
                 <div className='inputContainer'>
-                    <input
+                <TextField
+                    hintText="Title"
+                    errorText="This field is required."
+                    floatingLabelText="Title"
+                    multiLine={false}
+                    rows={1}
+                    name='title'
+                    type='text'
+                    value={this.state.title}
+                    onChange={this.handleChange}
+                    /><br />
+                    {/* <input
                         name='title'
                         type='text'
                         value={this.state.title}
                         placeholder='Note Title'
                         onChange={this.handleChange}
                     />
-                    <span className="underline"></span>
+                    <span className="underline"></span> */}
                 </div>
                 <div className='inputContainer'>
-                    <textarea
-                        name='content'
-                        type='text'
-                        value={this.state.content}
+                <TextField
+                    hintText="Links, notes, keys"
+                    errorText="This field is required."
+                    floatingLabelText="Put your notes here"
+                    multiLine={true}
+                    rows={4}
+                    name='content'
+                    type='text'
+                    value={this.state.content}
+                    onChange={this.handleChange}
+                    /><br />
+                    {/* <textarea
                         placeholder='Enter Note'
-                        onChange={this.handleChange}
                     ></textarea>
-                    <span className="underline"></span>
+                    <span className="underline"></span> */}
                 </div>
                 <div className='buttonContainer'>
                     <Button bsStyle='primary' type='submit'>{this.props.buttonText}</Button>

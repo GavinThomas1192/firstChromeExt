@@ -1,4 +1,5 @@
 import React from 'react';
+import './_app.scss';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import NoteCreateForm from '../note-create-form'
@@ -7,7 +8,9 @@ import NoteList from '../note-list'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import DatePicker from 'material-ui/DatePicker';
 import * as utils from '../../lib/storage';
 import { chromeGetRequest, chromeSetRequest, noteCreateRequest } from '../../action/note-actions';
 
@@ -41,29 +44,43 @@ class App extends React.Component {
 
 
     render() {
+        const actions = [
+            <FlatButton
+                label="Close"
+                primary={true}
+                keyboardFocused={true}
+                onClick={this.toggleCreateForm}
+            />,
+        ];
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
 
-                <div>
-                    <h1>Hello from App component</h1>
+                <div className="appDiv">
+                    <h1>Noterama</h1>
 
 
-                    {this.state.toggleNoteCreate ?
-                        <NoteCreateForm
-                            buttonText={'Submit'}
-                            onComplete={this.props.noteCreate}
-                            toggle={this.toggleCreateForm} /> : undefined
-                    }
+                        <Dialog
+                            title="Dialog With Date Picker"
+                            actions={actions}
+                            modal={false}
+                            open={this.state.toggleNoteCreate}
+                            onRequestClose={this.toggleCreateForm}
+                            autoScrollBodyContent={true}
 
-                    <RaisedButton label="Create Note" primary={true} onClick={() => this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })} />
+                        >
+                            <NoteCreateForm
+                                buttonText={'Submit'}
+                                onComplete={this.props.noteCreate}
+                                toggle={this.toggleCreateForm} />
+                        </Dialog> 
+                   
 
-                    {<Button bsStyle='primary' onClick={() => this.props.toggleNoteCreateForm()}>Toggle TEST</Button>}
+                    <RaisedButton label="Create Note" primary={true} onClick={() => this.setState({toggleNoteCreate: !this.state.toggleNoteCreate})} />
+
 
                     <NoteList
                     />
 
                 </div >
-            </MuiThemeProvider>
 
         )
     }
