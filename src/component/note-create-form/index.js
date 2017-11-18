@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import React from 'react';
 import { Button } from 'react-bootstrap'
 import TextField from 'material-ui/TextField';
+import {Editor, EditorState} from 'draft-js';
+
 
 
 
@@ -22,12 +24,16 @@ class NoteCreateForm extends React.Component {
             editing: false,
             completed: false,
             content,
+            editorState: EditorState.createEmpty(),
         };
-
+        this.onChange = this.onChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    onChange(editorState){
+        this.setState({editorState: editorState})
+    }
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
@@ -51,7 +57,8 @@ class NoteCreateForm extends React.Component {
 
     render() {
         return (
-
+            <div>
+            <Editor editorState={this.state.editorState} onChange={this.onChange} />
             <form onSubmit={this.handleSubmit}>
                 <div className='inputContainer'>
                 <TextField
@@ -95,6 +102,7 @@ class NoteCreateForm extends React.Component {
                     <Button bsStyle='primary' type='submit'>{this.props.buttonText}</Button>
                 </div>
             </form>
+            </div>
         );
     }
 }
