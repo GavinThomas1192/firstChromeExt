@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 import React from 'react';
 import { Button } from 'react-bootstrap'
 import TextField from 'material-ui/TextField';
-import {Editor, EditorState} from 'draft-js';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Editor, EditorState, RichUtils } from 'draft-js';
+import ReactQuill from 'react-quill';
+
 
 
 
@@ -24,16 +27,13 @@ class NoteCreateForm extends React.Component {
             editing: false,
             completed: false,
             content,
-            editorState: EditorState.createEmpty(),
         };
-        this.onChange = this.onChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
-    onChange(editorState){
-        this.setState({editorState: editorState})
-    }
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
@@ -55,53 +55,48 @@ class NoteCreateForm extends React.Component {
         this.props.toggle();
     }
 
+
+
+
     render() {
         return (
             <div>
-            <Editor editorState={this.state.editorState} onChange={this.onChange} />
-            <form onSubmit={this.handleSubmit}>
-                <div className='inputContainer'>
-                <TextField
-                    hintText="Title"
-                    errorText="This field is required."
-                    floatingLabelText="Title"
-                    multiLine={false}
-                    rows={1}
-                    name='title'
-                    type='text'
-                    value={this.state.title}
-                    onChange={this.handleChange}
-                    /><br />
-                    {/* <input
-                        name='title'
-                        type='text'
-                        value={this.state.title}
-                        placeholder='Note Title'
-                        onChange={this.handleChange}
-                    />
-                    <span className="underline"></span> */}
-                </div>
-                <div className='inputContainer'>
-                <TextField
-                    hintText="Links, notes, keys"
-                    errorText="This field is required."
-                    floatingLabelText="Put your notes here"
-                    multiLine={true}
-                    rows={4}
-                    name='content'
-                    type='text'
-                    value={this.state.content}
-                    onChange={this.handleChange}
-                    /><br />
-                    {/* <textarea
-                        placeholder='Enter Note'
-                    ></textarea>
-                    <span className="underline"></span> */}
-                </div>
-                <div className='buttonContainer'>
-                    <Button bsStyle='primary' type='submit'>{this.props.buttonText}</Button>
-                </div>
-            </form>
+
+
+                <form onSubmit={this.handleSubmit}>
+                    <div className='inputContainer'>
+                        <TextField
+                            hintText="Title"
+                            floatingLabelText="Title"
+                            multiLine={false}
+                            rows={1}
+                            name='title'
+                            type='text'
+                            value={this.state.title}
+                            onChange={this.handleChange}
+                        /><br />
+
+                    </div>
+                    <div className='inputContainer'>
+                        <TextField
+                            style={{ width: 426, overflow: 'scroll' }}
+                            hintText="Links, notes, keys"
+                            floatingLabelText="Put your notes here"
+                            multiLine={true}
+                            rows={4}
+                            name='content'
+                            type='text'
+                            value={this.state.content}
+                            onChange={this.handleChange}
+                        /><br />
+
+                    </div>
+                    <div className='buttonContainer'>
+
+                        <RaisedButton label={this.props.buttonText} primary={true} type='submit' />
+                        {/* <Button bsStyle='primary' type='submit'>{this.props.buttonText}</Button> */}
+                    </div>
+                </form>
             </div>
         );
     }

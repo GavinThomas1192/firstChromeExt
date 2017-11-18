@@ -54,33 +54,33 @@ class App extends React.Component {
         ];
         return (
 
-                <div className="appDiv">
-                    <h1>Noterama</h1>
+            <div className="appDiv">
+                <h1>Noterama</h1>
 
 
-                        <Dialog
-                            title="Dialog With Date Picker"
-                            actions={actions}
-                            modal={false}
-                            open={this.state.toggleNoteCreate}
-                            onRequestClose={this.toggleCreateForm}
-                            autoScrollBodyContent={true}
+                <Dialog
+                    title="Dialog With Date Picker"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.toggleNoteCreate}
+                    onRequestClose={this.toggleCreateForm}
+                    autoScrollBodyContent={true}
 
-                        >
-                            <NoteCreateForm
-                                buttonText={'Submit'}
-                                onComplete={this.props.noteCreate}
-                                toggle={this.toggleCreateForm} />
-                        </Dialog> 
-                   
-
-                    <RaisedButton label="Create Note" primary={true} onClick={() => this.setState({toggleNoteCreate: !this.state.toggleNoteCreate})} />
+                >
+                    <NoteCreateForm
+                        buttonText={'Submit'}
+                        onComplete={this.props.noteCreate}
+                        toggle={this.toggleCreateForm} />
+                </Dialog>
 
 
-                    <NoteList
-                    />
+                <RaisedButton label="Create Note" primary={true} onClick={() => this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })} />
 
-                </div >
+
+                <NoteList
+                />
+
+            </div >
 
         )
     }

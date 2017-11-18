@@ -62,8 +62,7 @@ class NoteItem extends React.Component {
                                     toggleText="Nevermind"
                                 />
                                 <Button bsStyle='success' onClick={this.setTrue}>Cancel</Button>
-                                Open a Date Picker dialog from within a dialog.
-            <DatePicker hintText="Date Picker" />
+
                             </Dialog>
                         </section>
                         :
@@ -78,7 +77,7 @@ class NoteItem extends React.Component {
                                 <RaisedButton primary={true} label="Edit" onClick={this.setTrue} />
                                 <FlatButton label="Delete" onClick={() => this.props.noteDelete(this.props.note)} />
                             </CardActions>
-                            <CardText expandable={true}>
+                            <CardText expandable={true} style={{ overflow: 'scroll' }}>
                                 {this.props.note.content}
                             </CardText>
                         </Card>
