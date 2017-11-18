@@ -41,7 +41,9 @@ class NoteItem extends React.Component {
                                 buttonText='Update Note'
                                 onComplete={this.props.noteUpdate}
                                 toggle={this.setTrue}
+                                toggleText="Nevermind"
                             />
+                            {/* THIS BUTTON NEEDS TO CHANGE TO NEVERMIND! */}
                             <Button bsStyle='success' onClick={this.setTrue}>Edit</Button>
                         </section>
                         :
