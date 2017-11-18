@@ -46,25 +46,23 @@ class NoteItem extends React.Component {
             <div>
                 {
                     this.state.editing == true ?
-                        <section className="update">
-                            <Dialog
-                                title="Dialog With Date Picker"
-                                actions={actions}
-                                modal={false}
-                                open={this.state.editing}
-                                onRequestClose={this.handleClose}
-                            >
-                                <NoteCreateForm
-                                    noteUpdate={this.props.note}
-                                    buttonText='Update Note'
-                                    onComplete={this.props.noteUpdate}
-                                    toggle={this.setTrue}
-                                    toggleText="Nevermind"
-                                />
-                                <Button bsStyle='success' onClick={this.setTrue}>Cancel</Button>
+                        <Dialog
+                            title="Dialog With Date Picker"
+                            actions={actions}
+                            modal={false}
+                            open={this.state.editing}
+                            onRequestClose={this.handleClose}
+                        >
+                            <NoteCreateForm
+                                noteUpdate={this.props.note}
+                                buttonText='Update Note'
+                                onComplete={this.props.noteUpdate}
+                                toggle={this.setTrue}
+                                toggleText="Nevermind"
+                            />
+                            <Button bsStyle='success' onClick={this.setTrue}>Cancel</Button>
 
-                            </Dialog>
-                        </section>
+                        </Dialog>
                         :
 
                         <Card>
