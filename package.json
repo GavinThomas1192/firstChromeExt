@@ -1,5 +1,5 @@
 {
-    "name": "kritter-frontend",
+    "name": "eznotes",
     "version": "1.0.0",
     "engines": {
         "node": "8.1.2"
@@ -46,9 +46,11 @@
         "react": "^15.6.2",
         "react-bootstrap": "^0.31.3",
         "react-dom": "^15.6.2",
+        "react-linkify": "^0.2.1",
         "react-redux": "^5.0.6",
         "react-router-dom": "^4.2.2",
         "react-scroll-to-component": "^1.0.1",
+        "react-sortable-hoc": "^0.6.8",
         "react-test-renderer": "^15.6.1",
         "redux": "^3.7.2",
         "sass-loader": "^6.0.6",

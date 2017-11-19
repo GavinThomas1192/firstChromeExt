@@ -52,6 +52,7 @@ class NoteCreateForm extends React.Component {
 
         })
         this.props.toggle();
+        this.props.simulateMenuClick(this.state);
     }
 
 
@@ -78,7 +79,7 @@ class NoteCreateForm extends React.Component {
                     </div>
                     <div className='inputContainer'>
                         <TextField
-                            style={{ width: 426, overflow: "scroll" }}
+                            style={{ width: 426 }}
                             hintText="Links, notes, keys"
                             floatingLabelText="Put your notes here"
                             multiLine={true}

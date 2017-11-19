@@ -19,6 +19,7 @@
         "storage",
         "webRequest",
         "webRequestBlocking",
+        "contextMenus",
         "<all_urls>"
     ]
 }
