@@ -14,7 +14,7 @@ import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
 import * as utils from '../../lib/storage';
 import { chromeGetRequest, chromeSetRequest, noteCreateRequest } from '../../action/note-actions';
-
+import Linkify from 'react-linkify'
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -26,6 +26,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             toggleNoteCreate: false,
+            toggleSingleNote: false,
             clickedMenuNote: {},
         }
         this.toggleCreateForm = this.toggleCreateForm.bind(this);
@@ -37,11 +38,13 @@ class App extends React.Component {
 
     componentDidMount() {
         this.props.chromeGet("notes");
+
     }
 
     componentDidUpdate() {
         this.props.chromeSet('notes', this.props.notes);
         console.log('LOOKHERE', this.props)
+
 
     }
 
@@ -55,14 +58,13 @@ class App extends React.Component {
     }
 
     handleClose() {
-        this.setState({ open: false });
+        this.setState({ open: false, toggleSingleNote: false });
     }
 
     handleSingleNote(clickedNote) {
         console.log('_CLICKED NOTE-', clickedNote)
-        this.setState({ clickedMenuNote: clickedNote })
-        this.toggleCreateForm()
-        this.handleClose()
+        this.setState({ clickedMenuNote: clickedNote, toggleSingleNote: !this.state.toggleSingleNote })
+        // this.handleClose()
     }
 
 
@@ -73,15 +75,16 @@ class App extends React.Component {
                 label="Close"
                 primary={true}
                 keyboardFocused={true}
-                onClick={this.toggleCreateForm}
+                onClick={this.handleClose}
             />,
         ];
+
         return (
 
             <div className="appDiv">
                 <h1>Noterama</h1>
 
-
+                {/* ***** CREATE NEW NOTE ***** */}
                 <Dialog
                     title="Your notes"
                     actions={actions}
@@ -100,6 +103,8 @@ class App extends React.Component {
 
                 <RaisedButton label="Create Note" primary={true} onClick={() => this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })} />
 
+
+                {/* ***** SIDE DRAWER ***** */}
                 <div>
                     <RaisedButton
                         label="Open Drawer"
@@ -119,20 +124,24 @@ class App extends React.Component {
                     </Drawer>
                 </div>
 
+                {/* ***** SINGLE NOTE VIEW ***** */}
                 <Dialog
                     title="Your notes"
                     actions={actions}
                     modal={false}
-                    open={this.state.toggleNoteCreate}
-                    onRequestClose={this.toggleCreateForm}
+                    open={this.state.toggleSingleNote}
+                    onRequestClose={this.handleClose}
                     autoScrollBodyContent={true}
 
                 >
-                    <NoteCreateForm
-                        buttonText={'Update Note'}
-                        onComplete={this.props.noteCreate}
-                        toggle={this.toggleCreateForm}
-                        noteUpdate={this.state.clickedMenuNote} />
+                    <Linkify properties={{ target: '_blank' }} >
+
+                        <div>
+                            <h2>{this.state.clickedMenuNote.title}</h2>
+                            <p>{this.state.clickedMenuNote.content}</p>
+                        </div>
+                    </Linkify>
+
                 </Dialog>
 
                 <NoteList

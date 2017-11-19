@@ -10,6 +10,8 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
+import Linkify from 'react-linkify'
+
 
 // import Colors from 'material-ui/styles/colors';
 
@@ -22,11 +24,7 @@ class NoteItem extends React.Component {
             editing: false,
             open: false,
         };
-
-
         this.setTrue = this.setTrue.bind(this);
-
-
     }
 
 
@@ -82,7 +80,9 @@ class NoteItem extends React.Component {
                         <FlatButton label="Delete" onClick={() => this.props.noteDelete(this.props.note)} />
                     </CardActions>
                     <CardText expandable={true} style={{}}>
-                        {this.props.note.content}
+                        <Linkify properties={{ target: '_blank' }} >
+                            {this.props.note.content}
+                        </Linkify>
                     </CardText>
                 </Card>
 
