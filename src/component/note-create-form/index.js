@@ -52,6 +52,7 @@ class NoteCreateForm extends React.Component {
 
         })
         this.props.toggle();
+        this.props.simulateMenuClick(this.state);
     }
 
 

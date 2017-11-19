@@ -7,6 +7,8 @@ import SingleNote from '../single-note';
 import uuid from 'uuid/v1';
 import NoteList from '../note-list'
 import AppBar from 'material-ui/AppBar';
+import { noteUpdateRequest, noteDeleteRequest } from '../../action/note-actions'
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -66,7 +68,7 @@ class App extends React.Component {
 
     handleSingleNote(clickedNote) {
         console.log('_CLICKED NOTE-', clickedNote)
-        this.setState({ clickedMenuNote: clickedNote, toggleSingleNote: !this.state.toggleSingleNote })
+        this.setState({ clickedMenuNote: clickedNote, toggleSingleNote: true })
         // this.handleClose()
     }
 
@@ -79,6 +81,21 @@ class App extends React.Component {
                 primary={true}
                 keyboardFocused={true}
                 onClick={this.handleClose}
+            />,
+        ];
+
+        const singleActions = [
+            <FlatButton
+                label="Close"
+                primary={true}
+                keyboardFocused={true}
+                onClick={this.handleClose}
+            />,
+            <FlatButton
+                label="Edit"
+                primary={true}
+                keyboardFocused={true}
+                onClick={this.toggleCreateForm}
             />,
         ];
 
@@ -112,15 +129,8 @@ class App extends React.Component {
                 </Dialog>
 
 
-                <RaisedButton label="Create Note" primary={true} onClick={() => this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })} />
-
-
                 {/* ***** SIDE DRAWER ***** */}
                 <div>
-                    <RaisedButton
-                        label="Open Drawer"
-                        onClick={this.handleToggle}
-                    />
                     <Drawer
                         docked={false}
                         width={200}
@@ -138,7 +148,7 @@ class App extends React.Component {
                 {/* ***** SINGLE NOTE VIEW ***** */}
                 <Dialog
                     title="Your notes"
-                    actions={actions}
+                    actions={singleActions}
                     modal={false}
                     open={this.state.toggleSingleNote}
                     onRequestClose={this.handleClose}
@@ -151,6 +161,23 @@ class App extends React.Component {
                             <h2>{this.state.clickedMenuNote.title}</h2>
                             <p>{this.state.clickedMenuNote.content}</p>
                         </div>
+                        {/* ***** EDIT POPUP AFTER CLICKING MENU ITEM ***** */}
+                        <Dialog
+                            title="Update This Note"
+                            actions={singleActions}
+                            modal={false}
+                            open={this.state.toggleNoteCreate}
+                            onRequestClose={this.toggleCreateForm}
+                            autoScrollBodyContent={true}
+
+                        >
+                            <NoteCreateForm
+                                buttonText={'Update Note'}
+                                onComplete={this.props.noteUpdate}
+                                simulateMenuClick={this.handleSingleNote}
+                                toggle={this.toggleCreateForm}
+                                noteUpdate={this.state.clickedMenuNote} />
+                        </Dialog>
                     </Linkify>
 
                 </Dialog>
@@ -173,6 +200,7 @@ let mapDispatchToProps = dispatch => ({
     chromeSet: (key, data) => dispatch(chromeSetRequest(key, data)),
     chromeGet: (key) => dispatch(chromeGetRequest(key)),
     noteCreate: (note) => dispatch(noteCreateRequest(note)),
+    noteUpdate: (note) => dispatch(noteUpdateRequest(note)),
 
 });
 
