@@ -69,17 +69,23 @@ class NoteItem extends React.Component {
 
 
 
-                <Card>
+                <Card
+                    style={{ overflow: "auto" }}
+                >
                     <CardHeader
                         title={this.props.note.title}
                         actAsExpander={true}
                         showExpandableButton={true}
+                        autoDetectWindowHeight={true}
+                        autoScrollBodyContent={true}
+
                     />
                     <CardActions>
                         <RaisedButton primary={true} label="Edit" onClick={this.setTrue} />
                         <FlatButton label="Delete" onClick={() => this.props.noteDelete(this.props.note)} />
                     </CardActions>
-                    <CardText expandable={true} style={{}}>
+                    <CardText expandable={true} style={{ overflow: "scroll" }} autoDetectWindowHeight={true}
+                        autoScrollBodyContent={true}>
                         <Linkify properties={{ target: '_blank' }} >
                             {this.props.note.content}
                         </Linkify>

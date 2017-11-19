@@ -158,8 +158,10 @@ class App extends React.Component {
                     <Linkify properties={{ target: '_blank' }} >
 
                         <div>
-                            <h2>{this.state.clickedMenuNote.title}</h2>
-                            <p>{this.state.clickedMenuNote.content}</p>
+                            <pre>
+                                <h2>{this.state.clickedMenuNote.title}</h2>
+                                <p>{this.state.clickedMenuNote.content}</p>
+                            </pre>
                         </div>
                         {/* ***** EDIT POPUP AFTER CLICKING MENU ITEM ***** */}
                         <Dialog
