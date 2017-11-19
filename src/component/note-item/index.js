@@ -10,6 +10,7 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
+
 // import Colors from 'material-ui/styles/colors';
 
 
@@ -19,10 +20,13 @@ class NoteItem extends React.Component {
         super(props);
         this.state = {
             editing: false,
+            open: false,
         };
 
 
         this.setTrue = this.setTrue.bind(this);
+
+
     }
 
 
@@ -30,6 +34,7 @@ class NoteItem extends React.Component {
     setTrue() {
         this.setState({ editing: !this.state.editing });
     }
+
 
 
 
@@ -44,43 +49,44 @@ class NoteItem extends React.Component {
         ];
         return (
             <div className='appDiv'>
-                        <Dialog
-                            title="Edit Note"
-                            actions={actions}
-                            modal={false}
-                            open={this.state.editing}
-                            onRequestClose={this.handleClose}
-                            autoDetectWindowHeight={true} 
-                            autoScrollBodyContent={true}
-                        >
-                            <NoteCreateForm
-                                noteUpdate={this.props.note}
-                                buttonText='Update Note'
-                                onComplete={this.props.noteUpdate}
-                                toggle={this.setTrue}
-                                toggleText="Nevermind"
-                            />
-                            <Button bsStyle='success' onClick={this.setTrue}>Cancel</Button>
+                <Dialog
+                    title="Edit Note"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.editing}
+                    onRequestClose={this.handleClose}
+                    autoDetectWindowHeight={true}
+                    autoScrollBodyContent={true}
+                >
+                    <NoteCreateForm
+                        noteUpdate={this.props.note}
+                        buttonText='Update Note'
+                        onComplete={this.props.noteUpdate}
+                        toggle={this.setTrue}
+                        toggleText="Nevermind"
+                    />
+                    <Button bsStyle='success' onClick={this.setTrue}>Cancel</Button>
 
-                        </Dialog>
-                        
+                </Dialog>
 
-                        <Card>
-                            <CardHeader
-                                title={this.props.note.title}
-                                actAsExpander={true}
-                                showExpandableButton={true}
-                            />
-                            <CardActions>
-                                <RaisedButton primary={true} label="Edit" onClick={this.setTrue} />
-                                <FlatButton label="Delete" onClick={() => this.props.noteDelete(this.props.note)} />
-                            </CardActions>
-                            <CardText expandable={true} style={{ overflow: 'scroll' }}>
-                                {this.props.note.content}
-                            </CardText>
-                        </Card>
 
-                
+
+                <Card>
+                    <CardHeader
+                        title={this.props.note.title}
+                        actAsExpander={true}
+                        showExpandableButton={true}
+                    />
+                    <CardActions>
+                        <RaisedButton primary={true} label="Edit" onClick={this.setTrue} />
+                        <FlatButton label="Delete" onClick={() => this.props.noteDelete(this.props.note)} />
+                    </CardActions>
+                    <CardText expandable={true} style={{}}>
+                        {this.props.note.content}
+                    </CardText>
+                </Card>
+
+
             </div>
         );
     }

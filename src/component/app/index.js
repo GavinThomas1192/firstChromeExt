@@ -2,7 +2,8 @@ import React from 'react';
 import './_app.scss';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import NoteCreateForm from '../note-create-form'
+import NoteCreateForm from '../note-create-form';
+import SingleNote from '../single-note';
 import uuid from 'uuid/v1';
 import NoteList from '../note-list'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -14,6 +15,9 @@ import DatePicker from 'material-ui/DatePicker';
 import * as utils from '../../lib/storage';
 import { chromeGetRequest, chromeSetRequest, noteCreateRequest } from '../../action/note-actions';
 
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+
 import RaisedButton from 'material-ui/RaisedButton';
 
 
@@ -22,8 +26,12 @@ class App extends React.Component {
         super(props);
         this.state = {
             toggleNoteCreate: false,
+            clickedMenuNote: {},
         }
         this.toggleCreateForm = this.toggleCreateForm.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
+        this.handleSingleNote = this.handleSingleNote.bind(this);
 
     }
 
@@ -39,6 +47,22 @@ class App extends React.Component {
 
     toggleCreateForm() {
         this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })
+    }
+
+    handleToggle() {
+
+        this.setState({ open: !this.state.open });
+    }
+
+    handleClose() {
+        this.setState({ open: false });
+    }
+
+    handleSingleNote(clickedNote) {
+        console.log('_CLICKED NOTE-', clickedNote)
+        this.setState({ clickedMenuNote: clickedNote })
+        this.toggleCreateForm()
+        this.handleClose()
     }
 
 
@@ -65,7 +89,6 @@ class App extends React.Component {
                     open={this.state.toggleNoteCreate}
                     onRequestClose={this.toggleCreateForm}
                     autoScrollBodyContent={true}
-                    style={{overflow: "scroll"}}
 
                 >
                     <NoteCreateForm
@@ -77,6 +100,40 @@ class App extends React.Component {
 
                 <RaisedButton label="Create Note" primary={true} onClick={() => this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })} />
 
+                <div>
+                    <RaisedButton
+                        label="Open Drawer"
+                        onClick={this.handleToggle}
+                    />
+                    <Drawer
+                        docked={false}
+                        width={200}
+                        open={this.state.open}
+                        onRequestChange={(open) => this.setState({ open })}
+                    >
+                        {this.props.notes.map((item, i) => (
+
+                            <MenuItem onClick={() => this.handleSingleNote(item)}>{item.title}</MenuItem>
+                        ))}
+                        <MenuItem onClick={this.handleClose}>Close Menu</MenuItem>
+                    </Drawer>
+                </div>
+
+                <Dialog
+                    title="Your notes"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.toggleNoteCreate}
+                    onRequestClose={this.toggleCreateForm}
+                    autoScrollBodyContent={true}
+
+                >
+                    <NoteCreateForm
+                        buttonText={'Update Note'}
+                        onComplete={this.props.noteCreate}
+                        toggle={this.toggleCreateForm}
+                        noteUpdate={this.state.clickedMenuNote} />
+                </Dialog>
 
                 <NoteList
                 />
