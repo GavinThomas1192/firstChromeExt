@@ -1,3 +1,11 @@
 .appDiv {
  text-align: center
 }
+
+.card {
+    overflow: scroll;
+}
+#root > div > div:nth-child(3) > div > div > div:nth-child(2) {
+    overflow: scroll;
+}
+
