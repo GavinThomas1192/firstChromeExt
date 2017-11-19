@@ -43,15 +43,15 @@ class NoteItem extends React.Component {
             />,
         ];
         return (
-            <div>
-                {
-                    this.state.editing == true ?
+            <div className='appDiv'>
                         <Dialog
-                            title="Dialog With Date Picker"
+                            title="Edit Note"
                             actions={actions}
                             modal={false}
                             open={this.state.editing}
                             onRequestClose={this.handleClose}
+                            autoDetectWindowHeight={true} 
+                            autoScrollBodyContent={true}
                         >
                             <NoteCreateForm
                                 noteUpdate={this.props.note}
@@ -63,7 +63,7 @@ class NoteItem extends React.Component {
                             <Button bsStyle='success' onClick={this.setTrue}>Cancel</Button>
 
                         </Dialog>
-                        :
+                        
 
                         <Card>
                             <CardHeader
@@ -80,7 +80,7 @@ class NoteItem extends React.Component {
                             </CardText>
                         </Card>
 
-                }
+                
             </div>
         );
     }

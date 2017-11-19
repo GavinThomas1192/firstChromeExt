@@ -5,8 +5,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Editor, EditorState, RichUtils } from 'draft-js';
-import ReactQuill from 'react-quill';
+
 
 
 
@@ -79,7 +78,7 @@ class NoteCreateForm extends React.Component {
                     </div>
                     <div className='inputContainer'>
                         <TextField
-                            style={{ width: 426 }}
+                            style={{ width: 426, overflow: "scroll" }}
                             hintText="Links, notes, keys"
                             floatingLabelText="Put your notes here"
                             multiLine={true}

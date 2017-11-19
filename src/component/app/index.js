@@ -59,12 +59,13 @@ class App extends React.Component {
 
 
                 <Dialog
-                    title="Dialog With Date Picker"
+                    title="Your notes"
                     actions={actions}
                     modal={false}
                     open={this.state.toggleNoteCreate}
                     onRequestClose={this.toggleCreateForm}
                     autoScrollBodyContent={true}
+                    style={{overflow: "scroll"}}
 
                 >
                     <NoteCreateForm
