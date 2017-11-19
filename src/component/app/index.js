@@ -6,6 +6,7 @@ import NoteCreateForm from '../note-create-form';
 import SingleNote from '../single-note';
 import uuid from 'uuid/v1';
 import NoteList from '../note-list'
+import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -17,6 +18,8 @@ import { chromeGetRequest, chromeSetRequest, noteCreateRequest } from '../../act
 import Linkify from 'react-linkify'
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -58,7 +61,7 @@ class App extends React.Component {
     }
 
     handleClose() {
-        this.setState({ open: false, toggleSingleNote: false });
+        this.setState({ open: false, toggleSingleNote: false, toggleNoteCreate: false, });
     }
 
     handleSingleNote(clickedNote) {
@@ -82,7 +85,15 @@ class App extends React.Component {
         return (
 
             <div className="appDiv">
-                <h1>Noterama</h1>
+                {/* ***** NAVBAR FOR DRAWER ***** */}
+                <AppBar
+                    title="Quick Notes"
+                    iconElementRight={<IconButton>
+                        <FontIcon className="material-icons">add_circle</FontIcon>
+                    </IconButton>}
+                    onLeftIconButtonTouchTap={this.handleToggle}
+                    onRightIconButtonTouchTap={this.toggleCreateForm}
+                />
 
                 {/* ***** CREATE NEW NOTE ***** */}
                 <Dialog
