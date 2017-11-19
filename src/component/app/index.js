@@ -9,6 +9,7 @@ import NoteList from '../note-list'
 import AppBar from 'material-ui/AppBar';
 import { noteUpdateRequest, noteDeleteRequest } from '../../action/note-actions'
 
+import SortableComponent from '../card-DND';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -102,6 +103,11 @@ class App extends React.Component {
         return (
 
             <div className="appDiv">
+
+                <SortableComponent
+                    notes={this.props.notes} />
+
+
                 {/* ***** NAVBAR FOR DRAWER ***** */}
                 <AppBar
                     title="Quick Notes"
@@ -185,6 +191,7 @@ class App extends React.Component {
                 </Dialog>
 
                 <NoteList
+                    toggleSingleNote={this.handleSingleNote}
                 />
 
             </div >

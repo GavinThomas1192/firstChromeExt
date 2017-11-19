@@ -34,7 +34,7 @@ class NoteList extends React.Component {
 
                 {this.props.notes.length !== 0 ?
                     <div style={styles.root}>
-                    <h1>Here are your notes</h1>
+                        <h1>Here are your notes</h1>
                         <GridList
                             cellHeight={180}
                             style={styles.gridList}
@@ -45,7 +45,7 @@ class NoteList extends React.Component {
                                 <GridTile
                                     key={i}
                                 >
-                                    <NoteItem key={i} note={item}
+                                    <NoteItem toggleSingleNote={this.props.toggleSingleNote} key={i} note={item}
 
                                     />
                                 </GridTile>
