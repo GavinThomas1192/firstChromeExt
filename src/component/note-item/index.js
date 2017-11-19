@@ -46,26 +46,23 @@ class NoteItem extends React.Component {
             <div>
                 {
                     this.state.editing == true ?
-                        <section className="update">
-                            <Dialog
-                                title="Dialog With Date Picker"
-                                actions={actions}
-                                modal={false}
-                                open={this.state.editing}
-                                onRequestClose={this.handleClose}
-                            >
-                                <NoteCreateForm
-                                    noteUpdate={this.props.note}
-                                    buttonText='Update Note'
-                                    onComplete={this.props.noteUpdate}
-                                    toggle={this.setTrue}
-                                    toggleText="Nevermind"
-                                />
-                                <Button bsStyle='success' onClick={this.setTrue}>Cancel</Button>
-                                Open a Date Picker dialog from within a dialog.
-            <DatePicker hintText="Date Picker" />
-                            </Dialog>
-                        </section>
+                        <Dialog
+                            title="Dialog With Date Picker"
+                            actions={actions}
+                            modal={false}
+                            open={this.state.editing}
+                            onRequestClose={this.handleClose}
+                        >
+                            <NoteCreateForm
+                                noteUpdate={this.props.note}
+                                buttonText='Update Note'
+                                onComplete={this.props.noteUpdate}
+                                toggle={this.setTrue}
+                                toggleText="Nevermind"
+                            />
+                            <Button bsStyle='success' onClick={this.setTrue}>Cancel</Button>
+
+                        </Dialog>
                         :
 
                         <Card>
@@ -78,7 +75,7 @@ class NoteItem extends React.Component {
                                 <RaisedButton primary={true} label="Edit" onClick={this.setTrue} />
                                 <FlatButton label="Delete" onClick={() => this.props.noteDelete(this.props.note)} />
                             </CardActions>
-                            <CardText expandable={true}>
+                            <CardText expandable={true} style={{ overflow: 'scroll' }}>
                                 {this.props.note.content}
                             </CardText>
                         </Card>

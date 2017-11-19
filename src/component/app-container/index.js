@@ -22,7 +22,8 @@ class AppContainer extends React.Component {
 
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+            // <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+            <MuiThemeProvider>
                 <Provider store={store}>
                     <App />
                 </Provider>
