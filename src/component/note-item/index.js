@@ -1,7 +1,5 @@
-// import './_note-item-container.scss';
 import { connect } from 'react-redux';
 import React from 'react';
-// import './_noteItem';
 import NoteCreateForm from '../note-create-form';
 import { Button } from 'react-bootstrap'
 import { noteUpdateRequest, noteDeleteRequest } from '../../action/note-actions'
@@ -15,7 +13,6 @@ import Paper from 'material-ui/Paper';
 
 
 
-// import Colors from 'material-ui/styles/colors';
 
 
 
@@ -46,21 +43,7 @@ class NoteItem extends React.Component {
         this.setState({ shadow: 5 });
     }
 
-    checkTag(body) {
-        let splitContentBody = body.split(" ")
-        const regex = /\.(jpe?g|png|gif|bmp)$/i;
-        let m;
-        splitContentBody.map(ele => {
 
-            if ((m = regex.exec(ele)) !== null) {
-                // The result can be accessed through the `m`-variable.
-                // m.forEach((match, groupIndex) => {
-                //     console.log(`Found match, group ${groupIndex}: ${match}`);
-                return <img src={ele} />
-                // });
-            }
-        })
-    }
 
 
 
@@ -118,8 +101,11 @@ class NoteItem extends React.Component {
                             style={{ overflow: "scroll" }}
                         />
                         <CardActions>
-                            <RaisedButton primary={true} label="Edit" onClick={this.setTrue} />
-                            <FlatButton label="Delete" onClick={() => this.props.noteDelete(this.props.note)} />
+
+                            <RaisedButton zDepth={3} primary={true} label="Edit" onClick={this.setTrue} />
+
+                            <RaisedButton zDepth={3} label="Delete" secondary={true} onClick={() => this.props.noteDelete(this.props.note)} />
+
                         </CardActions>
                         <CardText expandable={true} style={{ overflow: "scroll" }}>
                             <Linkify properties={{ target: '_blank' }} >

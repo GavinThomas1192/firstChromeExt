@@ -7,6 +7,8 @@ import { Row, Col } from 'react-bootstrap'
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import Snackbar from 'material-ui/Snackbar';
+
 
 const styles = {
     root: {
@@ -24,6 +26,9 @@ const styles = {
 class NoteList extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            open: true,
+        }
     }
 
     render() {
@@ -54,7 +59,14 @@ class NoteList extends React.Component {
                         </GridList>
                     </div>
                     :
-                    <h3>You have no notes!</h3>
+                    <Snackbar
+                        bodyStyle={{ width: '50%', textAlign: 'center' }}
+                        open={this.state.open}
+                        message={"You have no notes!"}
+                        action="Create One"
+                        onActionTouchTap={this.props.toggleCreate}
+
+                    />
                 }
             </div >
         );

@@ -51,22 +51,6 @@ export const chromeSetRequest = (key, data) => dispatch => {
 
 export const noteCreateRequest = note => dispatch => {
   console.log('_ROUTING_NEWNOTE_TO_STORE_', note)
-
-  let splitContentBody = note.content.split(" ")
-  const regex = /\.(jpe?g|png|gif|bmp)$/i;
-  let m;
-
-  splitContentBody.map(ele => {
-
-    if ((m = regex.exec(ele)) !== null) {
-      // The result can be accessed through the `m`-variable.
-      // m.forEach((match, groupIndex) => {
-      //     console.log(`Found match, group ${groupIndex}: ${match}`);
-      return note.images = { ele }
-      // });
-    }
-  })
-
   dispatch(noteCreate(note));
 }
 
