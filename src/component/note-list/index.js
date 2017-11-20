@@ -17,6 +17,10 @@ const styles = {
         justifyContent: 'space-around',
     },
     gridList: {
+        marginTop: 20,
+        marginBotton: 20,
+        marginRight: 5,
+        marginLeft: 5,
         width: 500,
         height: 450,
         overflowY: 'auto',
@@ -39,7 +43,6 @@ class NoteList extends React.Component {
 
                 {this.props.notes.length !== 0 ?
                     <div style={styles.root}>
-                        <h1>Here are your notes</h1>
                         <GridList
                             cellHeight={180}
                             style={styles.gridList}
