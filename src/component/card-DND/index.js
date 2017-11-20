@@ -3,14 +3,15 @@ import { render } from 'react-dom';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 
 const SortableItem = SortableElement(({ value }) =>
-    <li>{value}</li>
+    < li > {value}</li >
 );
 
 const SortableList = SortableContainer(({ items }) => {
+    console.log('hihiihiih', items)
     return (
         <ul>
             {items.map((value, index) => (
-                <SortableItem key={`item-${index}`} index={index} value={value} />
+                < SortableItem key={`item-${index}`} index={index} value={value} />
             ))}
         </ul>
     );
@@ -29,7 +30,9 @@ class SortableComponent extends Component {
         });
     };
     render() {
-        return <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />;
+        return (
+            <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
+        )
     }
 }
 

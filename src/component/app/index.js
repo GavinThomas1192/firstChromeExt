@@ -106,6 +106,7 @@ class App extends React.Component {
 
                 <SortableComponent
                     notes={this.props.notes} />
+                <h1>hello</h1>
 
 
                 {/* ***** NAVBAR FOR DRAWER ***** */}
