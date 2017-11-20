@@ -1,7 +1,5 @@
-// import './_note-item-container.scss';
 import { connect } from 'react-redux';
 import React from 'react';
-// import './_noteItem';
 import NoteCreateForm from '../note-create-form';
 import { Button } from 'react-bootstrap'
 import { noteUpdateRequest, noteDeleteRequest } from '../../action/note-actions'
@@ -15,7 +13,6 @@ import Paper from 'material-ui/Paper';
 
 
 
-// import Colors from 'material-ui/styles/colors';
 
 
 
@@ -45,6 +42,8 @@ class NoteItem extends React.Component {
     onMouseOut() {
         this.setState({ shadow: 5 });
     }
+
+
 
 
 
@@ -102,13 +101,17 @@ class NoteItem extends React.Component {
                             style={{ overflow: "scroll" }}
                         />
                         <CardActions>
-                            <RaisedButton primary={true} label="Edit" onClick={this.setTrue} />
-                            <FlatButton label="Delete" onClick={() => this.props.noteDelete(this.props.note)} />
+
+                            <RaisedButton zDepth={3} primary={true} label="Edit" onClick={this.setTrue} />
+
+                            <RaisedButton zDepth={3} label="Delete" secondary={true} onClick={() => this.props.noteDelete(this.props.note)} />
+
                         </CardActions>
                         <CardText expandable={true} style={{ overflow: "scroll" }}>
                             <Linkify properties={{ target: '_blank' }} >
                                 <pre>
-                                    {this.props.note.content}
+                                    <p>{this.props.note.content}</p>
+
                                 </pre>
                             </Linkify>
                         </CardText>

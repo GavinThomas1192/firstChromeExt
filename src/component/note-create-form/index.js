@@ -94,7 +94,6 @@ class NoteCreateForm extends React.Component {
                     <div className='buttonContainer'>
 
                         <RaisedButton label={this.props.buttonText} primary={true} type='submit' />
-                        {/* <Button bsStyle='primary' type='submit'>{this.props.buttonText}</Button> */}
                     </div>
                 </form>
             </div>

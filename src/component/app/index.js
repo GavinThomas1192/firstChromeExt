@@ -9,7 +9,6 @@ import NoteList from '../note-list'
 import AppBar from 'material-ui/AppBar';
 import { noteUpdateRequest, noteDeleteRequest } from '../../action/note-actions'
 
-import SortableComponent from '../card-DND';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -23,6 +22,7 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
+import Paper from 'material-ui/Paper';
 
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -40,6 +40,7 @@ class App extends React.Component {
         this.handleToggle = this.handleToggle.bind(this);
         this.handleSingleNote = this.handleSingleNote.bind(this);
 
+
     }
 
     componentDidMount() {
@@ -56,6 +57,7 @@ class App extends React.Component {
 
     toggleCreateForm() {
         this.setState({ toggleNoteCreate: !this.state.toggleNoteCreate })
+        console.log('togglin')
     }
 
     handleToggle() {
@@ -70,8 +72,8 @@ class App extends React.Component {
     handleSingleNote(clickedNote) {
         console.log('_CLICKED NOTE-', clickedNote)
         this.setState({ clickedMenuNote: clickedNote, toggleSingleNote: true })
-        // this.handleClose()
     }
+
 
 
 
@@ -104,13 +106,11 @@ class App extends React.Component {
 
             <div className="appDiv">
 
-                <SortableComponent
-                    notes={this.props.notes} />
 
 
                 {/* ***** NAVBAR FOR DRAWER ***** */}
                 <AppBar
-                    title="Quick Notes"
+                    title="Quick Note"
                     iconElementRight={<IconButton>
                         <FontIcon className="material-icons">add_circle</FontIcon>
                     </IconButton>}
@@ -120,7 +120,7 @@ class App extends React.Component {
 
                 {/* ***** CREATE NEW NOTE ***** */}
                 <Dialog
-                    title="Your notes"
+                    title="Create a new note"
                     actions={actions}
                     modal={false}
                     open={this.state.toggleNoteCreate}
@@ -137,6 +137,7 @@ class App extends React.Component {
 
                 {/* ***** SIDE DRAWER ***** */}
                 <div>
+
                     <Drawer
                         docked={false}
                         width={200}
@@ -145,7 +146,11 @@ class App extends React.Component {
                     >
                         {this.props.notes.map((item, i) => (
 
-                            <MenuItem onClick={() => this.handleSingleNote(item)}>{item.title}</MenuItem>
+
+                            <MenuItem onClick={() => this.handleSingleNote(item)}>
+                                {item.title}
+                            </MenuItem>
+
                         ))}
                         <MenuItem onClick={this.handleClose}>Close Menu</MenuItem>
                     </Drawer>
@@ -192,6 +197,7 @@ class App extends React.Component {
 
                 <NoteList
                     toggleSingleNote={this.handleSingleNote}
+                    toggleCreate={this.toggleCreateForm}
                 />
 
             </div >
