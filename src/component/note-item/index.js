@@ -46,6 +46,22 @@ class NoteItem extends React.Component {
         this.setState({ shadow: 5 });
     }
 
+    checkTag(body) {
+        let splitContentBody = body.split(" ")
+        const regex = /\.(jpe?g|png|gif|bmp)$/i;
+        let m;
+        splitContentBody.map(ele => {
+
+            if ((m = regex.exec(ele)) !== null) {
+                // The result can be accessed through the `m`-variable.
+                // m.forEach((match, groupIndex) => {
+                //     console.log(`Found match, group ${groupIndex}: ${match}`);
+                return <img src={ele} />
+                // });
+            }
+        })
+    }
+
 
 
 
@@ -108,7 +124,8 @@ class NoteItem extends React.Component {
                         <CardText expandable={true} style={{ overflow: "scroll" }}>
                             <Linkify properties={{ target: '_blank' }} >
                                 <pre>
-                                    {this.props.note.content}
+                                    <p>{this.props.note.content}</p>
+
                                 </pre>
                             </Linkify>
                         </CardText>
